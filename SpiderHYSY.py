@@ -7,11 +7,11 @@ import sys
 reload(sys)
 sys.setdefaultencoding('gbk')
 
+# 通过更换strs的不同请求搜索不同的书籍 可以找到对应网页的网址
+
+strs = u'神墓'  # 一定要有这个 u  没有u的话请求的编码会有错误
+
 url = 'http://www.huanyue123.com/modules/article/search.php'
-
-# user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
-
-strs = u'圣墟'  # 一定要有这个 u  没有u的话请求的编码会有错误
 
 values = {'searchkey': strs}
 
