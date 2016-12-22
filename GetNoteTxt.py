@@ -9,7 +9,11 @@ sys.setdefaultencoding('gbk')
 
 # 输入IP地址转换为文章文件保存至当前目录下  后面可能需要改一下输入保存地址
 
-url = 'http://www.huanyue123.com/book/0/11/10551.html'  # 文章的地址
+if len(sys.argv) != 2:
+    print 'Err : GetNoteTxt参数不够'
+    exit()
+url = sys.argv[1]
+# url = 'http://www.huanyue123.com/book/0/11/10551.html'  # 文章的地址
 
 try:
     request = urllib2.Request(url)
@@ -44,10 +48,10 @@ try:
     arti = re.sub(replaceBr, "\n", arti)
     arti = re.sub(replaceSpace, " ", arti)
 
-    print tit
-    print arti
+    # print tit
+    # print arti
 
-    f = file(tit + ".txt", 'w')
+    f = file("./0/" + tit + ".txt", 'w')
     f.write(tit)
     f.write("\n\n")
     f.write(arti)
