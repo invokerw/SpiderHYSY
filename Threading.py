@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# -*- coding: UTF-8 -*-
+# -*- coding=UTF-8 -*-
 
 import threading
 import time
@@ -7,7 +7,7 @@ import urllib
 import urllib2
 import sys
 import re
-
+import codecs
 reload(sys)
 sys.setdefaultencoding('gbk')
 
@@ -48,7 +48,6 @@ def DownLoadTextFromUrl(url):
 
         tit = ''   # 文章名字
         arti = ''  # 文章内容
-
         itemsTit = re.findall(title, content)
         for item in itemsTit:
             tit = item
@@ -63,15 +62,19 @@ def DownLoadTextFromUrl(url):
         # 把空格键替换， 把<br / >换成回车
         arti = re.sub(replaceBr, "\n", arti)
         arti = re.sub(replaceSpace, " ", arti)
-
+	# tit = tit.decode('gbk','ignore').encode('utf-8')
+	# arti = arti.decode('gbk','ignare').encode('utf-8')
         # print tit
         # print arti
-
-        f = file("./0/" + tit + ".txt", 'w')
-        f.write(tit)
-        f.write("\n\n")
-        f.write(arti)
-        f.close()
+	f = codecs.open('./0/' + tit + '.txt','w','utf-8')
+	f.write(tit)
+	f.write(arti)
+	f.close()
+        #  f = file("./0/" + tit + ".txt", 'w')
+        # f.write(tit)
+        # f.write("\n\n")
+        # f.write(arti)
+        # f.close()
 
     except urllib2.URLError, e:
         if hasattr(e, "code"):
